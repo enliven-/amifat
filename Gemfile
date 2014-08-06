@@ -49,6 +49,4 @@ gem 'bootstrap3-datetimepicker-rails'
 gem 'factory_girl_rails'
 gem 'rspec'
 gem 'rspec-rails'
-gem 'mocha'
 gem 'database_cleaner'
-

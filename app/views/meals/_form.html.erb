@@ -1,32 +1,47 @@
-<%= form_for @meal, :html => { :class => 'form-horizontal' }, remote: true do |f| %>
+<%= form_for @meal, html: { class: 'form-horizontal' }, remote: true do |f| %>
   <div class="form-group">
-    <%= f.label :name, :class => 'control-label' %>
+    <%= f.label :name, class: 'control-label' %>
     <div class="controls">
-      <%= f.text_field :name, :class => 'form-control' %>
+      <%= f.text_field :name, class: 'form-control' %>
     </div>
   </div>
   <div class="form-group">
-    <%= f.label :calories, :class => 'control-label' %>
+    <%= f.label :calories, class: 'control-label' %>
     <div class="controls">
-      <%= f.text_field :calories, :class => 'form-control' %>
+      <%= f.text_field :calories, class: 'form-control' %>
     </div>
   </div>
    <div class="form-group date">
-    <%= f.label :meal_time, :class => 'control-label' %>
+    <%= f.label :meal_time, class: 'control-label' %>
     <div class="controls">
-      <%= f.text_field :meal_time, :class => 'form-control datetime-picker' %>
+      <%= f.text_field :meal_time_text, class: 'form-control time-picker' %>
     </div>
   </div>
 
+  <div class="form-group date">
+    <%= f.label :meal_date, class: 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :meal_date_text, class: 'form-control date-picker' %>
+    </div>
+  </div>
   
-  <%= f.submit nil, :class => 'btn btn-primary' %>
-  <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
-            meals_path, :class => 'btn btn-default' %>
+  <%= f.submit nil, class: 'btn btn-primary' %>
+  <%= link_to t('.cancel', default: t("helpers.links.cancel")),
+            meals_path, class: 'btn btn-default' %>
  
 <% end %>
 
 <script type="text/javascript">
     $(function () {
-        $('.datetime-picker').datetimepicker();
+        $('.date-picker').datetimepicker({
+              pickTime: false
+          });
+    });
+
+    $(function () {
+        $('.time-picker').datetimepicker({
+              pickDate: false,
+              useSeconds: false
+          });
     });
 </script>

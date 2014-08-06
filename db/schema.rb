@@ -18,7 +18,8 @@ ActiveRecord::Schema.define(version: 20140806120810) do
     t.string   "calories"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "meal_time"
+    t.integer  "meal_time"
+    t.date     "meal_date"
   end
 
 end
