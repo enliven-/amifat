@@ -43,3 +43,10 @@ gem "therubyracer"
 gem "less-rails"
 gem "twitter-bootstrap-rails", github: 'seyhunak/twitter-bootstrap-rails', branch: 'bootstrap3'
 
+# test
+gem 'factory_girl_rails'
+gem 'rspec'
+gem 'rspec-rails'
+gem 'mocha'
+gem 'database_cleaner'
+
