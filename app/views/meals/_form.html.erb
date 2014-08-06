@@ -11,6 +11,12 @@
       <%= f.text_field :calories, :class => 'form-control' %>
     </div>
   </div>
+   <div class="form-group date">
+    <%= f.label :meal_time, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :meal_time, :class => 'form-control datetime-picker' %>
+    </div>
+  </div>
 
   
   <%= f.submit nil, :class => 'btn btn-primary' %>
@@ -18,3 +24,9 @@
             meals_path, :class => 'btn btn-default' %>
  
 <% end %>
+
+<script type="text/javascript">
+    $(function () {
+        $('.datetime-picker').datetimepicker();
+    });
+</script>

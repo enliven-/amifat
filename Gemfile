@@ -42,6 +42,8 @@ gem 'spring',        group: :development
 gem "therubyracer"
 gem "less-rails"
 gem "twitter-bootstrap-rails", github: 'seyhunak/twitter-bootstrap-rails', branch: 'bootstrap3'
+gem 'momentjs-rails', '2.5.0'
+gem 'bootstrap3-datetimepicker-rails'
 
 # test
 gem 'factory_girl_rails'
