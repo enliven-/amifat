@@ -2,7 +2,7 @@
 
 FactoryGirl.define do
   factory :meal do
-    name "MyString"
-    calories "MyString"
+    name "MyMeal"
+    calories "800"
   end
 end

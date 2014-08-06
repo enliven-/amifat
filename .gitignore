@@ -14,4 +14,10 @@
 # Ignore all logfiles and tempfiles.
 /log/*.log
 /tmp
+
+# Ignore these config files
 .rspec
+.ruby-version
+.ruby-gemset
+
+*.DS_Store

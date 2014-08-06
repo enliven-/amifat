@@ -14,25 +14,13 @@
   </thead>
   <tbody>
     <% @meals.each do |meal| %>
-      <tr>
-        <td><%= link_to meal.id, meal_path(meal) %></td>
-        <td><%= meal.name %></td>
-        <td><%= meal.calories %></td>
-        <td><%=l meal.created_at %></td>
-        <td>
-          <%= link_to t('.edit', :default => t("helpers.links.edit")),
-                      edit_meal_path(meal), :class => 'btn btn-default btn-xs' %>
-          <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
-                      meal_path(meal),
-                      :method => :delete,
-                      :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
-                      :class => 'btn btn-xs btn-danger' %>
-        </td>
-      </tr>
+        <%= render meal %>
     <% end %>
   </tbody>
 </table>
 
 <%= link_to t('.new', :default => t("helpers.links.new")),
             new_meal_path,
-            :class => 'btn btn-primary' %>
+            class: 'btn btn-primary',
+            id: 'new_form',
+            remote: true %>

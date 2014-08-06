@@ -1,18 +1,12 @@
 class MealsController < ApplicationController
   before_action :set_meal, only: [:show, :edit, :update, :destroy]
+  respond_to :html, :js
 
-  # GET /meals
-  # GET /meals.json
   def index
     @meals = Meal.all
+    #render json: @meals
   end
 
-  # GET /meals/1
-  # GET /meals/1.json
-  def show
-  end
-
-  # GET /meals/new
   def new
     @meal = Meal.new
   end
@@ -30,6 +24,7 @@ class MealsController < ApplicationController
       if @meal.save
         format.html { redirect_to @meal, notice: 'Meal was successfully created.' }
         format.json { render :show, status: :created, location: @meal }
+        format.js
       else
         format.html { render :new }
         format.json { render json: @meal.errors, status: :unprocessable_entity }
@@ -62,13 +57,13 @@ class MealsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_meal
-      @meal = Meal.find(params[:id])
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_meal
+    @meal = Meal.find(params[:id])
+  end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def meal_params
-      params.require(:meal).permit(:name, :calories)
-    end
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def meal_params
+    params.require(:meal).permit(:name, :calories)
+  end
 end
