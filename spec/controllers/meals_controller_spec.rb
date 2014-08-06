@@ -20,12 +20,12 @@ RSpec.describe MealsController, :type => :controller do
   #   end
   # end
 
-  # describe "GET new" do
-  #   it "assigns a new meal as @meal" do
-  #     get :new, {}, valid_session
-  #     expect(assigns(:meal)).to be_a_new(Meal)
-  #   end
-  # end
+  describe "GET new" do
+    it "assigns a new meal as @meal" do
+      get :new
+      expect(assigns(:meal)).to be_a_new(Meal)
+    end
+  end
 
   # describe "GET edit" do
   #   it "assigns the requested meal as @meal" do
