@@ -5,3 +5,8 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
+
+Meal.create(name: 'breakfast', cal: '2000', meal_time_text: '10:00 AM',
+            meal_date: Date.today)
+Meal.create(name: 'lunch', cal: '4000', meal_time_text: '1:00 PM',
+            meal_date: Date.today)
