@@ -4,7 +4,7 @@ class MealsController < ApplicationController
 
   def index
     @meals = Meal.all
-    #render json: @meals
+    render json: @meals
   end
 
   def new
@@ -13,6 +13,10 @@ class MealsController < ApplicationController
 
   # GET /meals/1/edit
   def edit
+    render json: @meal
+  end
+
+  def show
   end
 
   # POST /meals

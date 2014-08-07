@@ -36,4 +36,32 @@ RSpec.describe Meal, type: :model do
     meal.save!
     expect(meal.meal_time).to eq(43200)
   end
+
+  it "finds all the meals within time range" do
+    meal1 = create :meal, meal_time_text: '12:00 PM'
+    meal2 = create :meal, meal_time_text: '1:30 PM'
+    meal3 = create :meal, meal_time_text: '11:00 PM'
+    meal4 = create :meal, meal_time_text: '11:00 AM'
+    meal5 = create :meal, meal_time_text: '3:00 PM'
+
+    expect(Meal.within_time("12:00 PM", "3:00 PM")).to include(meal1)
+    expect(Meal.within_time("12:00 PM", "3:00 PM")).to include(meal2)
+    expect(Meal.within_time("12:00 PM", "3:00 PM")).to include(meal5)
+    expect(Meal.within_time("12:00 PM", "3:00 PM")).not_to include(meal3)
+    expect(Meal.within_time("12:00 PM", "3:00 PM")).not_to include(meal4)
+  end
+
+  it "finds all the meals within time range" do
+    meal1 = create :meal, meal_date: Date.today
+    meal2 = create :meal, meal_date: (Date.today + 30.days)
+    meal3 = create :meal, meal_date: (Date.today + 32.days)
+    meal4 = create :meal, meal_date: (Date.today - 2.days)
+    meal5 = create :meal, meal_date: (Date.today + 5.days)
+
+    expect(Meal.within_date(Date.today, (Date.today + 30.days))).to include(meal1)
+    expect(Meal.within_date(Date.today, (Date.today + 30.days))).to include(meal2)
+    expect(Meal.within_date(Date.today, (Date.today + 30.days))).to include(meal5)
+    expect(Meal.within_date(Date.today, (Date.today + 30.days))).not_to include(meal3)
+    expect(Meal.within_date(Date.today, (Date.today + 30.days))).not_to include(meal4)
+  end
 end

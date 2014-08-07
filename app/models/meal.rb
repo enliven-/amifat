@@ -1,8 +1,18 @@
 class Meal < ActiveRecord::Base
-
   attr_accessor :meal_time_text, :meal_date_text
-
   alias_attribute :cal, :calories
+
+  def self.within_time(from, to)
+    from = from.to_time.seconds_since_midnight.to_i
+    to = to.to_time.seconds_since_midnight.to_i
+    where(meal_time: (from..to))
+  end
+
+  def self.within_date(from, to)
+    from = from.to_date
+    to = to.to_date
+    where(meal_date: (from..to))
+  end
 
   private
 
