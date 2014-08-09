@@ -1,17 +1,31 @@
-<tr>
-<%= form_for @meal, html: { class: 'form-horizontal' }, remote: true do |f| %>
-      <td><%= f.text_field :name, class: 'form-control', placeholder: 'Meal' %></td>
-      <td><%= f.text_field :calories, class: 'form-control', placeholder: 'Calories' %></td>
-      <td><%= f.text_field :meal_time_text, class: 'form-control time-picker', placeholder: 'Time' %></td>
-      <td><%= f.text_field :meal_date_text, class: 'form-control date-picker', placeholder: 'Date' %></td>
-      <td>
-          <%= f.submit nil, class: 'btn btn-primary btn-xs' %>
-          <%= link_to t('.cancel', default: t("helpers.links.cancel")),
-            meals_path, class: 'btn btn-default btn-xs' %>
-      </td>
- 
-<% end %>
-</tr>
+<div class="modal-dialog modal-sm">
+  <div class="modal-content">
+    <div class="modal-header">
+      <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+      <h4 class="modal-title" id="myModalLabel">Meal</h4>
+    </div>
+    <%= form_for @meal, html: { class: 'form-vertical' }, remote: true do |f| %>
+      <div class="modal-body">
+          <div class="form-group">
+            <%= f.text_field :name, class: 'form-control', placeholder: 'Meal' %>
+          </div>
+          <div class="form-group">
+            <%= f.text_field :calories, class: 'form-control', placeholder: 'Calories' %>
+          </div>
+          <div class="form-group">
+            <%= f.text_field :meal_time_text, class: 'form-control time-picker', placeholder: 'Time', value: @meal.meal_time_to_s %>
+          </div>
+          <div class="form-group">
+            <%= f.text_field :meal_date_text, class: 'form-control date-picker', placeholder: 'Date', value: @meal.meal_date_to_s %>
+          </div>
+      </div>
+      <div class="modal-footer">
+        <%= button_tag 'Close', class: 'btn btn-default', data: { dismiss: 'modal' } %>
+        <%= f.submit nil, class: 'btn btn-primary' %>
+      </div>
+    <% end %>
+  </div>
+</div>
 
 <script type="text/javascript">
     $(function () {

@@ -39,6 +39,7 @@ class MealsController < ApplicationController
       if @meal.update(meal_params)
         format.html { redirect_to @meal, notice: 'Meal was successfully updated.' }
         format.json { render :show, status: :ok, location: @meal }
+        format.js
       else
         format.html { render :edit }
         format.json { render json: @meal.errors, status: :unprocessable_entity }

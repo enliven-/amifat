@@ -14,6 +14,15 @@ class Meal < ActiveRecord::Base
     where(meal_date: (from..to))
   end
 
+  def meal_time_to_s
+    meal_time.present? ? Time.at(meal_time).strftime("%I:%M %p") : nil
+  end
+
+  def meal_date_to_s
+    meal_date.present? ? meal_date.strftime("%m/%d/%Y") : nil
+  end
+
+
   private
 
   before_save :save_meal_time_in_seconds

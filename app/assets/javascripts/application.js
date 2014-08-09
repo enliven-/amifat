@@ -20,18 +20,15 @@
 
 $(document).ready(function() {
 
-  var clickOnSignupLink = function(){
-    $('body').on('click', '.signup-popup-link', function(){
-      $('#signup-modal').modal('show');
+  var openModalOnLink = function(link, modal) {
+    $('body').on('click', link, function(){
+      $(modal).modal('show');
     });
   }
-  clickOnSignupLink();
 
-  var clickOnSigninLink = function(){
-    $('body').on('click', '.signin-popup-link', function(){
-      $('#signin-modal').modal('show');
-    });
-  }
-  clickOnSigninLink();
+  openModalOnLink('.signup-popup-link', '#signup-modal');
+  openModalOnLink('.signin-popup-link', '#signin-modal');
+  openModalOnLink('#new_form', '#meal-modal');
+  openModalOnLink('.edit-meal', '#meal-modal');
 
 });
