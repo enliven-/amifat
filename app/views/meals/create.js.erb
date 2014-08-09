@@ -1,3 +1,2 @@
-$('body').removeClass('modal-open')
-$('#meal-modal').removeClass('in').attr('aria-hidden', true).off('click.dismiss.bs.modal')
+$('#meal-modal').modal('hide')
 $('.table').append('<%= j render(@meal) %>')

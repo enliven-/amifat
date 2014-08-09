@@ -1,4 +1,3 @@
-$('body').removeClass('modal-open')
-$('#signin-modal').removeClass('in').attr('aria-hidden', true).off('click.dismiss.bs.modal')
+$('#signin-modal').modal('hide')
 $('#user-session-links').remove()
 $('#user-links').html('<%= j render("layouts/user_session_links") %>')

@@ -1,3 +1,2 @@
-$('body').removeClass('modal-open')
-$('#meal-modal').removeClass('in').attr('aria-hidden', true).on('click.dismiss.bs.modal')
+$('#meal-modal').modal('hide')
 $('#<%= "meal_#{@meal.id}" %>').replaceWith('<%= j render(@meal) %>')
