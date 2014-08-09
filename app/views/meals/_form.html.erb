@@ -1,35 +1,17 @@
+<tr>
 <%= form_for @meal, html: { class: 'form-horizontal' }, remote: true do |f| %>
-  <div class="form-group">
-    <%= f.label :name, class: 'control-label' %>
-    <div class="controls">
-      <%= f.text_field :name, class: 'form-control' %>
-    </div>
-  </div>
-  <div class="form-group">
-    <%= f.label :calories, class: 'control-label' %>
-    <div class="controls">
-      <%= f.text_field :calories, class: 'form-control' %>
-    </div>
-  </div>
-   <div class="form-group date">
-    <%= f.label :meal_time, class: 'control-label' %>
-    <div class="controls">
-      <%= f.text_field :meal_time_text, class: 'form-control time-picker' %>
-    </div>
-  </div>
-
-  <div class="form-group date">
-    <%= f.label :meal_date, class: 'control-label' %>
-    <div class="controls">
-      <%= f.text_field :meal_date_text, class: 'form-control date-picker' %>
-    </div>
-  </div>
-  
-  <%= f.submit nil, class: 'btn btn-primary' %>
-  <%= link_to t('.cancel', default: t("helpers.links.cancel")),
-            meals_path, class: 'btn btn-default' %>
+      <td><%= f.text_field :name, class: 'form-control', placeholder: 'Meal' %></td>
+      <td><%= f.text_field :calories, class: 'form-control', placeholder: 'Calories' %></td>
+      <td><%= f.text_field :meal_time_text, class: 'form-control time-picker', placeholder: 'Time' %></td>
+      <td><%= f.text_field :meal_date_text, class: 'form-control date-picker', placeholder: 'Date' %></td>
+      <td>
+          <%= f.submit nil, class: 'btn btn-primary btn-xs' %>
+          <%= link_to t('.cancel', default: t("helpers.links.cancel")),
+            meals_path, class: 'btn btn-default btn-xs' %>
+      </td>
  
 <% end %>
+</tr>
 
 <script type="text/javascript">
     $(function () {

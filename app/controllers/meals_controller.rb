@@ -1,6 +1,6 @@
 class MealsController < ApplicationController
   before_action :set_meal, only: [:show, :edit, :update, :destroy]
-  respond_to :html, :js
+  respond_to :js
 
   def index
     @meals = Meal.all
@@ -12,7 +12,6 @@ class MealsController < ApplicationController
 
   # GET /meals/1/edit
   def edit
-    render json: @meal
   end
 
   def show
@@ -25,8 +24,6 @@ class MealsController < ApplicationController
 
     respond_to do |format|
       if @meal.save
-        format.html { redirect_to @meal, notice: 'Meal was successfully created.' }
-        format.json { render :show, status: :created, location: @meal }
         format.js
       else
         format.html { render :new }
@@ -56,6 +53,7 @@ class MealsController < ApplicationController
     respond_to do |format|
       format.html { redirect_to meals_url, notice: 'Meal was successfully destroyed.' }
       format.json { head :no_content }
+      format.js
     end
   end
 
