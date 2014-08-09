@@ -46,12 +46,8 @@
           <span class="icon-bar"></span>
         </button>
         <a class="navbar-brand" href="#">Amifat</a>
-        <div class="navbar-collapse collapse navbar-responsive-collapse">
-          <ul class="nav navbar-nav">
-            <li><%= link_to "Link1", "/path1"  %></li>
-            <li><%= link_to "Link2", "/path2"  %></li>
-            <li><%= link_to "Link3", "/path3"  %></li>
-          </ul>
+        <div class="navbar-collapse collapse navbar-responsive-collapse" id="user-links">
+          <%= render partial: 'layouts/user_session_links' %>
         </div>
       </div>
     </div>
@@ -79,7 +75,14 @@
         <p>&copy; Company 2014</p>
       </footer>
 
+      <div class="modal fade" id="signup-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"></div>
+      <div class="modal fade" id="signin-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"></div>
+
     </div> <!-- /container -->
 
   </body>
 </html>
+
+<script type="text/javascript">
+  
+</script>

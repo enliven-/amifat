@@ -14,6 +14,7 @@ RSpec.describe Meal, type: :model do
   it "has valid factories" do
     meal = build :meal
     expect(meal).to be_valid
+    expect(meal.save).to be_truthy
   end
 
   it "saves string date as a date object" do

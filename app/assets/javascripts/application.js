@@ -17,3 +17,21 @@
 //= require moment
 //= require bootstrap-datetimepicker
 //= require_tree .
+
+$(document).ready(function() {
+
+  var clickOnSignupLink = function(){
+    $('body').on('click', '.signup-popup-link', function(){
+      $('#signup-modal').modal('show');
+    });
+  }
+  clickOnSignupLink();
+
+  var clickOnSigninLink = function(){
+    $('body').on('click', '.signin-popup-link', function(){
+      $('#signin-modal').modal('show');
+    });
+  }
+  clickOnSigninLink();
+
+});
