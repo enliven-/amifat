@@ -2,6 +2,17 @@
 <div class="page-header">
   <h1><%=t '.title', default: model_class.model_name.human.pluralize.titleize %></h1>
 </div>
+
+<div id="filters">
+  <div id="time-filter">
+    <%= text_field_tag :from, params[:filter][:from], class: 'form-control time-picker' %>
+    <%= text_field_tag :to,   params[:filter][:to], class: 'form-control time-picker' %>
+  </div>
+
+  <div id="date-filter">
+  </div>
+</div>
+
 <table class="table table-striped">
   <thead>
     <tr>
@@ -24,3 +35,18 @@
             class:  'btn btn-primary',
             id:     'new_form',
             remote: true %>
+
+<script type="text/javascript">
+    $(function () {
+        $('.date-picker').datetimepicker({
+              pickTime: false
+          });
+    });
+
+    $(function () {
+        $('.time-picker').datetimepicker({
+              pickDate: false,
+              useSeconds: false
+          });
+    });
+</script>

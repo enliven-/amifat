@@ -5,6 +5,8 @@ class User < ActiveRecord::Base
   validate :password, presence: true, on: :create
   validate :calorie_cuttoff, presence: true
 
+  has_many :meals
+
   before_save :encrypt_password
   def encrypt_password
     if password.present?

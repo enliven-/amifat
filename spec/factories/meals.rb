@@ -6,5 +6,6 @@ FactoryGirl.define do
     calories "800"
     meal_date { Date.today }
     meal_time 43200
+    user
   end
 end
