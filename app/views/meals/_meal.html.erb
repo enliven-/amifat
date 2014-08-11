@@ -4,10 +4,10 @@
   <td><%= meal.meal_time_to_s %></td>
   <td><%= meal.meal_date_to_s %></td>
   <td>
-    <%= link_to t('.edit', default: t("helpers.links.edit")),
+    <%= link_to 'Edit',
                 edit_meal_path(meal), class: 'btn btn-default btn-xs edit-meal',
                 remote: true %>
-    <%= link_to t('.destroy', default: t("helpers.links.destroy")),
+    <%= link_to 'Delete',
                 meal_path(meal),
                 method: :delete,
                 remote: true,

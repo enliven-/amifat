@@ -4,31 +4,14 @@
 </div>
 
 <div id="filters">
-  <div id="time-filter">
-    <%= text_field_tag :from, params[:filter][:from], class: 'form-control time-picker' %>
-    <%= text_field_tag :to,   params[:filter][:to], class: 'form-control time-picker' %>
-  </div>
-
-  <div id="date-filter">
-  </div>
+    <%= text_field_tag :time_from, nil, class: 'form-control time-picker filters', id: 'filter-time-from', value: @meals.first.meal_time_to_s %>
+    <%= text_field_tag :time_to, nil, class: 'form-control time-picker filters', id: 'filter-time-to', value: @meals.last.meal_time_to_s %>
+	<%= text_field_tag :date_from, nil, class: 'form-control date-picker filters', id: 'filter-date-from', data: { 'date-format' => 'DD/MM/YYYY'}, value: @meals.first.meal_date_to_s %>
+	<%= text_field_tag :date_to, nil, class: 'form-control date-picker filters', id: 'filter-date-to', data: { 'date-format' => 'DD/MM/YYYY'}, value: @meals.last.meal_date_to_s %>
 </div>
-
-<table class="table table-striped">
-  <thead>
-    <tr>
-      <th><%= model_class.human_attribute_name(:meal) %></th>
-      <th><%= model_class.human_attribute_name(:calories) %></th>
-      <th><%= model_class.human_attribute_name(:time) %></th>
-      <th><%= model_class.human_attribute_name(:date) %></th>
-      <th><%=t '.actions', default: t("helpers.actions") %></th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @meals.each do |meal| %>
-        <%= render meal %>
-    <% end %>
-  </tbody>
-</table>
+<div id="meals-table">
+	<%= render partial: 'meals_table', locals: { meals: @meals } %>
+</div>
 
 <%= link_to t('.new', default: t("helpers.links.new")),
             new_meal_path,

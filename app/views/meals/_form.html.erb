@@ -16,7 +16,7 @@
             <%= f.text_field :meal_time_text, class: 'form-control time-picker', placeholder: 'Time', value: @meal.meal_time_to_s %>
           </div>
           <div class="form-group">
-            <%= f.text_field :meal_date_text, class: 'form-control date-picker', placeholder: 'Date', value: @meal.meal_date_to_s %>
+            <%= f.text_field :meal_date_text, class: 'form-control date-picker', placeholder: 'Date', value: @meal.meal_date_to_s, data: { 'date-format' => 'DD/MM/YYYY'} %>
           </div>
       </div>
       <div class="modal-footer">

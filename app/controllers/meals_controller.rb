@@ -18,9 +18,10 @@ class MealsController < ApplicationController
   end
 
   # POST /meals
-  # POST /meals.json
+  # POST /meals.json  
   def create
     @meal = Meal.new(meal_params)
+    @meal.user = current_user
 
     respond_to do |format|
       if @meal.save
@@ -56,6 +57,13 @@ class MealsController < ApplicationController
       format.json { head :no_content }
       format.js
     end
+  end
+  
+  def filters
+    @meals = Meal
+             .within_time(params[:filter][:time][:from], params[:filter][:time][:to])
+             .within_date(params[:filter][:date][:from], params[:filter][:date][:to])
+    render json: { meals_table: render_to_string(partial: 'meals_table', locals: { meals: @meals }) }
   end
 
   private

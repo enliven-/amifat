@@ -1,0 +1,18 @@
+<% if meals.empty? %>
+<p>Sorry, no meals found between that time.</p>
+<% else %>
+	<table class="table table-striped">
+	  <thead>
+	    <tr>
+	      <th>Meal</th>
+	      <th>Calories</th>
+	      <th>Time</th>
+	      <th>Date</th>
+	      <th></th>
+	    </tr>
+	  </thead>
+	  <tbody>
+		  <%= render meals %>
+	  </tbody>
+	</table>
+<% end %>
