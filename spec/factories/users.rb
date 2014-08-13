@@ -2,7 +2,7 @@
 
 FactoryGirl.define do
   factory :user do
-    email "foo@bar.com"
+    username "foo@bar.com"
     password "password"
     calorie_cuttoff '120000'
     name 'Foo Bar'

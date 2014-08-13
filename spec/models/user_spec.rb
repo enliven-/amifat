@@ -1,10 +1,10 @@
 require 'rails_helper'
 
 RSpec.describe User, type: :model do
-  it 'responds to attributes email, password, calorie_cuttoff' do
+  it 'responds to attributes username, password, calorie_cuttoff' do
     user = User.new
 
-    expect(user).to respond_to(:email)
+    expect(user).to respond_to(:username)
     expect(user).to respond_to(:password)
     expect(user).to respond_to(:calorie_cuttoff)
   end
@@ -23,13 +23,13 @@ RSpec.describe User, type: :model do
   end
 
   it 'authenticates user with right password' do
-    user = create :user, email: 'foo@bar.com', password: 'password'
+    user = create :user, username: 'foo@bar.com', password: 'password'
 
     expect(User.authenticate('foo@bar.com', 'password')).to eql(user)
   end
 
   it 'doesnt authenticate user with wrong password' do
-    user = create :user, email: 'foo@bar.com', password: 'password'
+    user = create :user, username: 'foo@bar.com', password: 'password'
 
     expect(User.authenticate('foo@bar.com', 'wrongpasswors')).to be_nil
   end

@@ -1,7 +1,7 @@
 class User < ActiveRecord::Base
   attr_accessor :password
 
-  validate :email, presence: true, uniqueness: true
+  validate :username, presence: true, uniqueness: true
   validate :password, presence: true, on: :create
   validate :calorie_cuttoff, presence: true
 
@@ -15,8 +15,8 @@ class User < ActiveRecord::Base
     end
   end
 
-  def self.authenticate(email, password)
-    user = find_by(email: email)
+  def self.authenticate(username, password)
+    user = find_by(username: username)
     if user && user.password_hash ==
         BCrypt::Engine.hash_secret(password, user.password_hash)
       user

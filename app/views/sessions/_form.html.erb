@@ -7,10 +7,10 @@
       <%= form_tag sessions_path, remote: true, html: { class: 'form-vertical' } do %>
         <div class="modal-body">
   			<div class="form-group">
-              <%= email_field_tag :email, params[:email], placeholder: 'Email', class: 'form-control' %>
+              <%= text_field_tag :username, params[:username], placeholder: 'username', class: 'form-control' %>
             </div>
             <div class="form-group">
-              <%= password_field_tag :password, params[:email], placeholder: 'Password', class: 'form-control' %>
+              <%= password_field_tag :password, params[:username], placeholder: 'Password', class: 'form-control' %>
             </div>
         </div>
         <div class="modal-footer">
