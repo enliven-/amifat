@@ -22,6 +22,10 @@ class Meal < ActiveRecord::Base
       where(meal_date: (from..to))
     end
   end
+  
+  def self.total_calories
+    inject(0) { |sum, meal| sum + meal.calories.to_i }
+  end
 
   def meal_time_to_s
     meal_time.present? ? Time.at(meal_time).strftime("%I:%M %p") : nil

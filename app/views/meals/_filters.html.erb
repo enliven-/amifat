@@ -1,0 +1,21 @@
+<div class="col-lg-3" id="filters">
+  <div class="well sidebar-nav">
+    <h3>Filters</h3>
+    <ul class="nav nav-list">
+		<h4>Time</h4>
+		<li>
+			<h5>From</h5>
+		    <%= text_field_tag :time_from, nil, class: 'form-control time-picker filters', id: 'filter-time-from', value: @meals.first.meal_time_to_s %>
+		    <h5>To</h5>
+		    <%= text_field_tag :time_to, nil, class: 'form-control time-picker filters', id: 'filter-time-to', value: @meals.last.meal_time_to_s %>
+		</li>
+		<br>
+		<h4>Date</h4>
+		<h5>From</h5>
+			<li><%= text_field_tag :date_from, nil, class: 'form-control date-picker filters', id: 'filter-date-from', data: { 'date-format' => 'DD/MM/YYYY'}, value: @meals.first.meal_date_to_s %>
+			<h5>To</h5>
+			<%= text_field_tag :date_to, nil, class: 'form-control date-picker filters', id: 'filter-date-to', data: { 'date-format' => 'DD/MM/YYYY'}, value: @meals.last.meal_date_to_s %>
+		</li>
+	</ul>
+  </div>
+</div>

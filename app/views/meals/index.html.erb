@@ -3,12 +3,6 @@
   <h1><%=t '.title', default: model_class.model_name.human.pluralize.titleize %></h1>
 </div>
 
-<div id="filters">
-    <%= text_field_tag :time_from, nil, class: 'form-control time-picker filters', id: 'filter-time-from', value: @meals.first.meal_time_to_s %>
-    <%= text_field_tag :time_to, nil, class: 'form-control time-picker filters', id: 'filter-time-to', value: @meals.last.meal_time_to_s %>
-	<%= text_field_tag :date_from, nil, class: 'form-control date-picker filters', id: 'filter-date-from', data: { 'date-format' => 'DD/MM/YYYY'}, value: @meals.first.meal_date_to_s %>
-	<%= text_field_tag :date_to, nil, class: 'form-control date-picker filters', id: 'filter-date-to', data: { 'date-format' => 'DD/MM/YYYY'}, value: @meals.last.meal_date_to_s %>
-</div>
 <div id="meals-table">
 	<%= render partial: 'meals_table', locals: { meals: @meals } %>
 </div>
