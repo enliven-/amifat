@@ -1,9 +1,13 @@
 class MealsController < ApplicationController
   before_action :set_meal, only: [:show, :edit, :update, :destroy]
-  respond_to :js
-
+  respond_to :js, :html
+    
   def index
     @meals = Meal.all
+    respond_to do |format|
+      format.html
+      format.js
+    end
   end
 
   def new

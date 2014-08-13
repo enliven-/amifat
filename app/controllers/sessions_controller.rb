@@ -10,7 +10,9 @@ class SessionsController < ApplicationController
 
       respond_to do |format|
         format.js
-      end
+      end     
+    else
+      
     end
   end
 

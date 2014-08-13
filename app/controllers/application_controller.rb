@@ -14,6 +14,8 @@ class ApplicationController < ActionController::Base
     !!current_user
   end
   helper_method :user_signed_in?
-
-
+  
+  def authenticate_user!
+    render text: 'Please sign in to continue..' if !user_signed_in?
+  end
 end

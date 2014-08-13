@@ -1,3 +1,12 @@
-$('#signin-modal').modal('hide')
-$('#user-session-links').remove()
-$('#user-links').html('<%= j render("layouts/user_session_links") %>')
+$('#signin-modal').modal('hide');
+$('#user-session-links').remove();
+$('#user-links').html('<%= j render("layouts/user_session_links") %>');
+$.ajax({
+  type: 'GET',
+  url: '<%= root_path %>',
+  data: {},
+  cache: false,
+  success: function(result) {
+      $('body').html(result)
+  }
+});

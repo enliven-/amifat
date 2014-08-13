@@ -1,29 +1,35 @@
 <%- model_class = Meal -%>
-<div class="page-header">
-  <h1><%=t '.title', default: model_class.model_name.human.pluralize.titleize %></h1>
-</div>
+<div class="row">
+	<div class="col-lg-9">
+		<div class="page-header">
+			<h1><%=t '.title', default: model_class.model_name.human.pluralize.titleize %></h1>
+		</div>
 
-<div id="meals-table">
-	<%= render partial: 'meals_table', locals: { meals: @meals } %>
-</div>
+		<div id="meals-table">
+			<%= render partial: 'meals_table', locals: { meals: @meals } %>
+		</div>
 
-<%= link_to t('.new', default: t("helpers.links.new")),
-            new_meal_path,
-            class:  'btn btn-primary',
-            id:     'new_form',
-            remote: true %>
+		<%= link_to t('.new', default: t("helpers.links.new")),
+		new_meal_path,
+		class:  'btn btn-primary',
+		id:     'new_form',
+		remote: true %>
+	</div>
+			
+	<%= render partial: 'filters'%>
+</div>
 
 <script type="text/javascript">
-    $(function () {
-        $('.date-picker').datetimepicker({
-              pickTime: false
-          });
-    });
+$(function () {
+	$('.date-picker').datetimepicker({
+		pickTime: false
+	});
+});
 
-    $(function () {
-        $('.time-picker').datetimepicker({
-              pickDate: false,
-              useSeconds: false
-          });
-    });
+$(function () {
+	$('.time-picker').datetimepicker({
+		pickDate: false,
+		useSeconds: false
+	});
+});
 </script>
