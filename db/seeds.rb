@@ -6,12 +6,27 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
-2.times do |n|
-  User.create(name: "Foo Bar #{n}", username: "foobar#{n}", password: 'password', calorie_cuttoff: (2000 + rand(2000)).to_s)
-end
-10.times do |n|
-  Meal.create(name: "breakfast#{n}", cal: '2000', meal_time_text: '10:00 AM',
-              meal_date_text: Date.today, user: User.all.sample)
-  Meal.create(name: "lunch#{n}", cal: '4000', meal_time_text: "#{1+rand(11)}:00 PM",
-              meal_date: Date.today + rand(25).days, user: User.all.sample)
+ankush = User.create(username: 'ankush', calorie_cuttoff: '6000', password: 'password')
+bhushan = User.create(username: 'bhushan', calorie_cuttoff: '5000', password: 'password')
+viksit = User.create(username: 'viksit', calorie_cuttoff: '7000', password: 'password')
+
+meals = [
+  ['Idli', '450'],
+  ['Medu Wada', '850'],
+  ['Wada Sambar', '1000'],
+  ['Aloo Paratha',  '600'],
+  ['Dahi bhalla', '700'],
+  ['Cheese Pizza', '1000'],
+  ['Burger' , '800']
+]
+
+meal = meals.sample
+
+20.times do 
+  meal = meals.sample
+  Meal.create name: meal[0],
+  calories: meal[1],
+  meal_time: rand(24*60*60),
+  meal_date: (Date.today + rand(29).days),
+  user: User.all.sample
 end
