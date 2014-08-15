@@ -53,12 +53,10 @@
 	</div>
 
 	<div class="container">
-		<% if user_signed_in? %>
+		<div class="row content">
 			<%= yield %> 
-		<% else %>
-			Please Sign in to Continue..	
-		<% end %>
- 
+		</div>
+		
 		<div class="modal fade" id="signup-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"></div>
 		<div class="modal fade" id="signin-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"></div>
 		<div class="modal fade" id="meal-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"></div>

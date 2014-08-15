@@ -1,127 +1,113 @@
 require 'rails_helper'
 
-RSpec.describe MealsController, :type => :controller do
+RSpec.describe MealsController, type: :controller do
+  
+  before(:each) do
+    @user = create :user, username: 'foobar'
+    sign_in @user
+  end
 
   describe "GET index" do
-    it "populates an array of meals" do
-      meal = create :meal
+    it "populates an array of meals of signed in user" do
+      user1 = create :user, username: 'foo'
+      user2 = create :user, username: 'bar'
+      meal1 = create :meal, user: user1
+      meal2 = create :meal, user: user2
+      
+      sign_in(user1)
+      
       get :index
 
       expect(response).to be_success
-      expect(assigns(:meals)).to include(meal)
+      expect(assigns(:meals)).to include(meal1)
+      expect(assigns(:meals)).not_to include(meal2)
     end
   end
-
-  # describe "GET show" do
-  #   it "assigns the requested meal as @meal" do
-  #     meal = Meal.create! valid_attributes
-  #     get :show, {:id => meal.to_param}, valid_session
-  #     expect(assigns(:meal)).to eq(meal)
-  #   end
-  # end
-
+  
   describe "GET new" do
     it "assigns a new meal as @meal" do
-      get :new
+      xhr :get, :new
       expect(assigns(:meal)).to be_a_new(Meal)
     end
   end
+  
+  describe "GET edit" do
+    it "assigns the requested meal as @meal" do
+      meal = create :meal, user: @user
+      xhr :get, :edit, id: meal.id
+      expect(assigns(:meal)).to eq(meal)
+    end
+  end
 
-  # describe "GET edit" do
-  #   it "assigns the requested meal as @meal" do
-  #     meal = Meal.create! valid_attributes
-  #     get :edit, {:id => meal.to_param}, valid_session
-  #     expect(assigns(:meal)).to eq(meal)
-  #   end
-  # end
+  describe "POST create" do
+    describe "with valid params" do
+      it "creates a new Meal" do
+        expect {
+          xhr :post, :create, meal: attributes_for(:meal)
+        }.to change(Meal, :count).by(1)
+      end
 
-  # describe "POST create" do
-  #   describe "with valid params" do
-  #     it "creates a new Meal" do
-  #       expect {
-  #         post :create, {:meal => valid_attributes}, valid_session
-  #       }.to change(Meal, :count).by(1)
-  #     end
+      it "assigns a newly created meal as @meal" do
+        xhr :post, :create, meal: attributes_for(:meal)
+        expect(assigns(:meal)).to be_a(Meal)
+        expect(assigns(:meal)).to be_persisted
+      end
+    end
 
-  #     it "assigns a newly created meal as @meal" do
-  #       post :create, {:meal => valid_attributes}, valid_session
-  #       expect(assigns(:meal)).to be_a(Meal)
-  #       expect(assigns(:meal)).to be_persisted
-  #     end
+    describe "with invalid params" do
+      it "assigns a newly created but unsaved meal as @meal" do
+        xhr :post, :create, meal: attributes_for(:invalid_meal)
+        expect(assigns(:meal)).to be_a_new(Meal)
+      end
 
-  #     it "redirects to the created meal" do
-  #       post :create, {:meal => valid_attributes}, valid_session
-  #       expect(response).to redirect_to(Meal.last)
-  #     end
-  #   end
+      it "assigned meal is not persisted" do
+       xhr :post, :create, meal: attributes_for(:invalid_meal)
+        expect(assigns(:meal)).not_to be_persisted
+      end
+    end
+  end
 
-  #   describe "with invalid params" do
-  #     it "assigns a newly created but unsaved meal as @meal" do
-  #       post :create, {:meal => invalid_attributes}, valid_session
-  #       expect(assigns(:meal)).to be_a_new(Meal)
-  #     end
+  describe "PUT update" do
+    describe "with valid params" do
+      it "updates the requested meal" do
+        meal = create :meal
+        xhr :put, :update, id: meal.to_param, meal: attributes_for(:meal, calories: "300")
+        meal.reload
+        expect(meal.calories).to eql("300")
+      end
 
-  #     it "re-renders the 'new' template" do
-  #       post :create, {:meal => invalid_attributes}, valid_session
-  #       expect(response).to render_template("new")
-  #     end
-  #   end
-  # end
+      it "assigns the requested meal as @meal" do
+        meal = create :meal
+        xhr :put, :update, id: meal.to_param, meal: attributes_for(:meal, calories: "300")
+        expect(assigns(:meal)).to eq(meal)
+      end
 
-  # describe "PUT update" do
-  #   describe "with valid params" do
-  #     let(:new_attributes) {
-  #       skip("Add a hash of attributes valid for your model")
-  #     }
+    end
 
-  #     it "updates the requested meal" do
-  #       meal = Meal.create! valid_attributes
-  #       put :update, {:id => meal.to_param, :meal => new_attributes}, valid_session
-  #       meal.reload
-  #       skip("Add assertions for updated state")
-  #     end
+    describe "with invalid params" do
+      it "assigns the meal as @meal" do
+        meal = create :meal
+        xhr :put, :update, id: meal.to_param, meal: attributes_for(:meal, calories: nil)
+        expect(assigns(:meal)).to eq(meal)
+      end
 
-  #     it "assigns the requested meal as @meal" do
-  #       meal = Meal.create! valid_attributes
-  #       put :update, {:id => meal.to_param, :meal => valid_attributes}, valid_session
-  #       expect(assigns(:meal)).to eq(meal)
-  #     end
+      it "does not updates the requested meal" do
+        meal = create :meal
+        cal = meal.calories
+        xhr :put, :update, id: meal.to_param, meal: attributes_for(:meal, calories: nil)
+        meal.reload
+        expect(meal.calories).to eql(cal)
+      end
+    end
+  end
 
-  #     it "redirects to the meal" do
-  #       meal = Meal.create! valid_attributes
-  #       put :update, {:id => meal.to_param, :meal => valid_attributes}, valid_session
-  #       expect(response).to redirect_to(meal)
-  #     end
-  #   end
-
-  #   describe "with invalid params" do
-  #     it "assigns the meal as @meal" do
-  #       meal = Meal.create! valid_attributes
-  #       put :update, {:id => meal.to_param, :meal => invalid_attributes}, valid_session
-  #       expect(assigns(:meal)).to eq(meal)
-  #     end
-
-  #     it "re-renders the 'edit' template" do
-  #       meal = Meal.create! valid_attributes
-  #       put :update, {:id => meal.to_param, :meal => invalid_attributes}, valid_session
-  #       expect(response).to render_template("edit")
-  #     end
-  #   end
-  # end
-
-  # describe "DELETE destroy" do
-  #   it "destroys the requested meal" do
-  #     meal = Meal.create! valid_attributes
-  #     expect {
-  #       delete :destroy, {:id => meal.to_param}, valid_session
-  #     }.to change(Meal, :count).by(-1)
-  #   end
-
-  #   it "redirects to the meals list" do
-  #     meal = Meal.create! valid_attributes
-  #     delete :destroy, {:id => meal.to_param}, valid_session
-  #     expect(response).to redirect_to(meals_url)
-  #   end
-  # end
+  describe "DELETE destroy" do
+    it "destroys the requested meal" do
+      meal = create :meal
+      expect {
+        xhr :delete, :destroy, id: meal.to_param
+      }.to change(Meal, :count).by(-1)
+    end
+  end
 
 end

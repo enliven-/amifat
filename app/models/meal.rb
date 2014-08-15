@@ -4,13 +4,16 @@ class Meal < ActiveRecord::Base
   
   attr_accessor :meal_time_text, :meal_date_text
   alias_attribute :cal, :calories
+  
+  validates :name, presence: true
+  validates :calories, presence: true, numericality: true
 
   belongs_to :user
 
   def self.within_time(from, to)
     if from.present? && to.present?
-      from = from.to_time.seconds_since_midnight.to_i
-      to = to.to_time.seconds_since_midnight.to_i
+      from = Time.zone.parse(from).utc.seconds_since_midnight.to_i
+      to = Time.zone.parse(to).utc.seconds_since_midnight.to_i
       where(meal_time: (from..to))
     end
   end
@@ -22,11 +25,7 @@ class Meal < ActiveRecord::Base
       where(meal_date: (from..to))
     end
   end
-  
-  def self.total_calories
-    inject(0) { |sum, meal| sum + meal.calories.to_i }
-  end
-
+ 
   def meal_time_to_s
     meal_time.present? ? Time.at(meal_time).strftime("%I:%M %p") : nil
   end
@@ -37,12 +36,12 @@ class Meal < ActiveRecord::Base
   
   private
 
-  before_save :save_meal_time_in_seconds
+  before_create :save_meal_time_in_seconds
   def save_meal_time_in_seconds
-    self.meal_time ||= meal_time_text.to_time.seconds_since_midnight.to_i if meal_time_text.present?
+    self.meal_time ||= Time.zone.parse(meal_time_text).utc.seconds_since_midnight.to_i if meal_time_text.present?
   end
 
-  before_save :save_meal_date_as_date_object
+  before_create :save_meal_date_as_date_object
   def save_meal_date_as_date_object
     self.meal_date ||= meal_date_text.to_date if meal_date_text.present?
   end

@@ -13,5 +13,6 @@ $(document).on 'change', '.filters', (event) ->
 			'filter[date][to]':   $('#filter-date-to').val()
 		success: (data, status, xhr) ->
 			$('#meals-table').html(data.meals_table)
+			$('.meal').addClass(data.css_class)
 		error: (status, error) ->
 			alert("We experienced an error trying to filter the records. Sorry.")

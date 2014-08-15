@@ -7,8 +7,9 @@ class UsersController < ApplicationController
     @user = User.new(user_params)
     respond_to do |format|
       if @user.save
-        session[:user_id] = @user.id
         format.js
+      else
+        format.js { render(partial: "application/failure") }
       end
     end
   end

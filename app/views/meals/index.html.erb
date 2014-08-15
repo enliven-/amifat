@@ -1,23 +1,5 @@
-<%- model_class = Meal -%>
-<div class="row">
-	<div class="col-lg-9">
-		<div class="page-header">
-			<h1><%=t '.title', default: model_class.model_name.human.pluralize.titleize %></h1>
-		</div>
-
-		<div id="meals-table">
-			<%= render partial: 'meals_table', locals: { meals: @meals } %>
-		</div>
-
-		<%= link_to t('.new', default: t("helpers.links.new")),
-		new_meal_path,
-		class:  'btn btn-primary',
-		id:     'new_form',
-		remote: true %>
-	</div>
-			
-	<%= render partial: 'filters'%>
-</div>
+<div id="meals"><%= render partial: 'meals' %></div>
+<div id="filters"><%= render partial: 'filters'%></div>
 
 <script type="text/javascript">
 $(function () {

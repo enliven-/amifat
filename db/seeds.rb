@@ -5,9 +5,13 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
+
+2.times do |n|
+  User.create(name: "Foo Bar #{n}", username: "foobar#{n}", password: 'password', calorie_cuttoff: (2000 + rand(2000)).to_s)
+end
 10.times do |n|
   Meal.create(name: "breakfast#{n}", cal: '2000', meal_time_text: '10:00 AM',
-              meal_date_text: Date.today)
+              meal_date_text: Date.today, user: User.all.sample)
   Meal.create(name: "lunch#{n}", cal: '4000', meal_time_text: "#{1+rand(11)}:00 PM",
-              meal_date: Date.today + rand(25).days)
+              meal_date: Date.today + rand(25).days, user: User.all.sample)
 end

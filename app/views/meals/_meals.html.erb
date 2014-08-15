@@ -1,0 +1,15 @@
+<div class="col-lg-9">
+	<div class="page-header">
+		<h1>Meals<span class="pull-right"><h3>Limit: <%= current_user.calorie_cuttoff %> calories/day</h3></span></h1>
+	</div>
+
+	<div id="meals-table">
+		<%= render partial: 'meals/meals_table', locals: { meals: @meals } %>
+	</div>
+
+	<%= link_to t('.new', default: t("helpers.links.new")),
+	new_meal_path,
+	class:  'btn btn-primary',
+	id:     'new_form',
+	remote: true %>
+</div>

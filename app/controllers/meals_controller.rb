@@ -1,38 +1,31 @@
 class MealsController < ApplicationController
   before_action :set_meal, only: [:show, :edit, :update, :destroy]
   respond_to :js, :html
+  
+  before_filter :authenticate_user
     
   def index
-    @meals = Meal.all
-    respond_to do |format|
-      format.html
-      format.js
-    end
+    @meals = current_user.meals
   end
 
   def new
-    @meal = Meal.new
+    @meal = Meal.new(user: current_user)
   end
 
   # GET /meals/1/edit
   def edit
   end
 
-  def show
-  end
-
   # POST /meals
   # POST /meals.json  
   def create
     @meal = Meal.new(meal_params)
-    @meal.user = current_user
-
+    
     respond_to do |format|
       if @meal.save
         format.js
       else
-        format.html { render :new }
-        format.json { render json: @meal.errors, status: :unprocessable_entity }
+        format.js { render(partial: "application/failure") }
       end
     end
   end
@@ -42,12 +35,9 @@ class MealsController < ApplicationController
   def update
     respond_to do |format|
       if @meal.update(meal_params)
-        format.html { redirect_to @meal, notice: 'Meal was successfully updated.' }
-        format.json { render :show, status: :ok, location: @meal }
         format.js
       else
-        format.html { render :edit }
-        format.json { render json: @meal.errors, status: :unprocessable_entity }
+        format.js { render(partial: "application/failure") }
       end
     end
   end
@@ -57,17 +47,19 @@ class MealsController < ApplicationController
   def destroy
     @meal.destroy
     respond_to do |format|
-      format.html { redirect_to meals_url, notice: 'Meal was successfully destroyed.' }
-      format.json { head :no_content }
       format.js
     end
   end
   
   def filters
-    @meals = Meal
+    css_class = ''
+    @meals = current_user.meals
              .within_time(params[:filter][:time][:from], params[:filter][:time][:to])
              .within_date(params[:filter][:date][:from], params[:filter][:date][:to])
-    render json: { meals_table: render_to_string(partial: 'meals_table', locals: { meals: @meals }) }
+    if params[:filter][:date][:from] == params[:filter][:date][:to]
+      css_class = @meals.inject(0) {|s, c| s + c.cal.to_i } > current_user.calorie_cuttoff.to_i ? 'danger' : 'success'
+    end
+    render json: { meals_table: render_to_string(partial: 'meals_table', locals: { meals: @meals }), css_class: css_class }
   end
 
   private
