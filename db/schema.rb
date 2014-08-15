@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140810071109) do
+ActiveRecord::Schema.define(version: 20140815091526) do
 
   create_table "meals", force: true do |t|
     t.string   "name"
@@ -27,7 +27,6 @@ ActiveRecord::Schema.define(version: 20140810071109) do
     t.string   "username"
     t.string   "password_hash"
     t.string   "password_salt"
-    t.string   "name"
     t.string   "calorie_cuttoff"
     t.datetime "created_at"
     t.datetime "updated_at"

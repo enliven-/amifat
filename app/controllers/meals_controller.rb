@@ -9,7 +9,7 @@ class MealsController < ApplicationController
   end
 
   def new
-    @meal = Meal.new(user: current_user)
+    @meal = Meal.new
   end
 
   # GET /meals/1/edit
@@ -20,6 +20,7 @@ class MealsController < ApplicationController
   # POST /meals.json  
   def create
     @meal = Meal.new(meal_params)
+    @meal.user = current_user
     
     respond_to do |format|
       if @meal.save

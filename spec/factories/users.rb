@@ -5,6 +5,5 @@ FactoryGirl.define do
     username "foo@bar.com"
     password "password"
     calorie_cuttoff '120000'
-    name 'Foo Bar'
   end
 end
