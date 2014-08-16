@@ -33,4 +33,11 @@ RSpec.describe User, type: :model do
 
     expect(User.authenticate('foo@bar.com', 'wrongpasswors')).to be_nil
   end
+  
+  it 'user exceeded it calorie limit' do
+    user = create :user, calorie_cuttoff: 5000
+    meal = create :meal, cal: 6000, user: user, meal_date: Date.today
+    
+    assert(user.overeaten?(Date.today))
+  end
 end
