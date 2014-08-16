@@ -1,6 +1,6 @@
 <ul class="nav navbar-nav pull-right" id="user-session-links">
 	<% if user_signed_in? %>
-	  <li class="disabled"><%= link_to "Hey, #{current_user.username}" %></li>
+	  <li class="username">Hey, <%= current_user.username %></li>
 	  <li><%= link_to "Logout", log_out_path, remote: true %></li>
 	<% else %>
 	  <li><%= link_to "Sign up", new_user_path, remote: true, class: 'signup-popup-link' %></li>
