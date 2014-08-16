@@ -20,7 +20,7 @@ RSpec.describe Meal, type: :model do
   it "saves string date as a date object" do
     date = "08/07/2014".to_date
     meal = create :meal, name: 'xyz', cal: '1200', meal_date_text: '08/07/2014',
-                    meal_time_text: '12:00 pm', meal_date: nil
+                    meal_time_text: '12:00 pm'
 
     expect(meal).to be_valid
 
@@ -30,7 +30,7 @@ RSpec.describe Meal, type: :model do
 
   it "saves string time in second since midnight" do
     meal = create :meal, name: 'xyz', cal: '1200', meal_date_text: '08/07/2014',
-                    meal_time_text: '12:00 pm', meal_time: nil
+                    meal_time_text: '12:00 pm'
 
     expect(meal).to be_valid
 
