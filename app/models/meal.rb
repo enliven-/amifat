@@ -14,16 +14,18 @@ class Meal < ActiveRecord::Base
     if from.present? && to.present?
       from = Time.zone.parse(from).utc.seconds_since_midnight.to_i
       to = Time.zone.parse(to).utc.seconds_since_midnight.to_i
-      where(meal_time: (from..to))
+      return where(meal_time: (from..to))
     end
+    all
   end
 
   def self.within_date(from, to)
     if from.present? && to.present?
       from = from.to_date
       to = to.to_date
-      where(meal_date: (from..to))
+      return where(meal_date: (from..to))
     end
+    all
   end
  
   def meal_time_to_s

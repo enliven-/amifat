@@ -3,7 +3,8 @@ class User < ActiveRecord::Base
 
   validate :username, presence: true, uniqueness: true
   validate :password, presence: true, on: :create
-  validate :calorie_cuttoff, presence: true
+  validate :calorie_cuttoff, presence: true,
+  numericality: { greater_than_or_equal_to: 0 }
 
   has_many :meals
 
@@ -23,5 +24,21 @@ class User < ActiveRecord::Base
     else
       nil
     end
+  end
+  
+  def day_total_calories(date)
+    meals.where(meal_date: date).inject(0) { |sum, meal| sum + meal.cal.to_i }
+  end
+  
+  def day_calorie_difference(date)
+    day_total_calories(date) - calorie_cuttoff.to_i
+  end
+  
+  def overeaten?(date)
+    day_calorie_difference(date) > 0
+  end
+  
+  def undereaten?(date)
+    day_calorie_difference(date) <= 0
   end
 end
