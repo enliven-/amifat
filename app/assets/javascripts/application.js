@@ -32,3 +32,15 @@ $(document).ready(function() {
   openModalOnLink('.edit-meal', '#meal-modal');
 
 });
+
+$(document).ready(function() {
+	console.log('Loading...')
+	$('.date-picker').datetimepicker({
+		pickTime: false
+	});
+	
+	$('.time-picker').datetimepicker({
+		pickDate: false,
+		useSeconds: false
+	});
+});

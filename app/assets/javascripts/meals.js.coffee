@@ -2,7 +2,7 @@
 # All this logic will automatically be available in application.js.
 # You can use CoffeeScript in this file: http://coffeescript.org/
 
-$(document).on 'change', '.filters', (event) ->
+$(document).on 'click', '.filter-button', (event) ->
 	$.ajax
 		url: '/meals/filters'
 		type: 'GET'

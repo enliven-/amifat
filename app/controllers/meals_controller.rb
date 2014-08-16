@@ -55,11 +55,12 @@ class MealsController < ApplicationController
   def filters
     css_class = ''
     @meals = current_user.meals
-             .within_time(params[:filter][:time][:from], params[:filter][:time][:to])
              .within_date(params[:filter][:date][:from], params[:filter][:date][:to])
-    if params[:filter][:date][:from] == params[:filter][:date][:to]
-      css_class = @meals.inject(0) {|s, c| s + c.cal.to_i } > current_user.calorie_cuttoff.to_i ? 'danger' : 'success'
-    end
+             .within_time(params[:filter][:time][:from], params[:filter][:time][:to])
+            
+    # if params[:filter][:date][:from] == params[:filter][:date][:to]
+  #     css_class = @meals.inject(0) {|s, c| s + c.cal.to_i } > current_user.calorie_cuttoff.to_i ? 'danger' : 'success'
+  #   end
     render json: { meals_table: render_to_string(partial: 'meals_table', locals: { meals: @meals }), css_class: css_class }
   end
 

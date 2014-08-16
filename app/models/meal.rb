@@ -36,7 +36,7 @@ class Meal < ActiveRecord::Base
   
   private
 
-  before_create :save_meal_time_in_seconds
+  before_save :save_meal_time_in_seconds
   def save_meal_time_in_seconds
     self.meal_time ||= Time.zone.parse(meal_time_text).utc.seconds_since_midnight.to_i if meal_time_text.present?
   end

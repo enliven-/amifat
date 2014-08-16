@@ -26,7 +26,7 @@ meal = meals.sample
   meal = meals.sample
   Meal.create name: meal[0],
   calories: meal[1],
-  meal_time: rand(24*60*60),
+  meal_time_text: "#{rand(23)}: #{rand(59)}",
   meal_date: (Date.today + rand(29).days),
   user: User.all.sample
 end
