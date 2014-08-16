@@ -12,8 +12,8 @@ class Meal < ActiveRecord::Base
 
   def self.within_time(from, to)
     if from.present? && to.present?
-      from = Time.zone.parse(from).utc.seconds_since_midnight.to_i
-      to = Time.zone.parse(to).utc.seconds_since_midnight.to_i
+      from = Time.zone.parse(from).seconds_since_midnight.to_i
+      to = Time.zone.parse(to).seconds_since_midnight.to_i
       return where(meal_time: (from..to))
     end
     all
@@ -29,7 +29,7 @@ class Meal < ActiveRecord::Base
   end
  
   def meal_time_to_s
-    meal_time.present? ? Time.at(meal_time).strftime("%I:%M %p") : nil
+    meal_time.present? ? Time.zone.at(meal_time).utc.strftime("%I:%M %p") : nil
   end
 
   def meal_date_to_s
@@ -40,7 +40,7 @@ class Meal < ActiveRecord::Base
 
   before_save :save_meal_time_in_seconds
   def save_meal_time_in_seconds
-    self.meal_time = Time.zone.parse(meal_time_text).utc.seconds_since_midnight.to_i if meal_time_text.present?
+    self.meal_time = Time.zone.parse(meal_time_text).seconds_since_midnight.to_i if meal_time_text.present?
   end
 
   before_create :save_meal_date_as_date_object
