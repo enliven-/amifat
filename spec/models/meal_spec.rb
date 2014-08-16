@@ -40,11 +40,11 @@ RSpec.describe Meal, type: :model do
 
   it "finds all the meals within time range" do
     user = create :user
-    meal1 = create :meal, meal_time_text: '12:00 PM', meal_time: nil, user: user
-    meal2 = create :meal, meal_time_text: '1:30 PM',  meal_time: nil, user: user, user: user
-    meal3 = create :meal, meal_time_text: '11:00 PM', meal_time: nil, user: user, user: user
-    meal4 = create :meal, meal_time_text: '11:00 AM', meal_time: nil, user: user, user: user
-    meal5 = create :meal, meal_time_text: '3:00 PM',  meal_time: nil, user: user, user: user
+    meal1 = create :meal, meal_time_text: '12:00 PM', user: user
+    meal2 = create :meal, meal_time_text: '1:30 PM',  user: user
+    meal3 = create :meal, meal_time_text: '11:00 PM', user: user
+    meal4 = create :meal, meal_time_text: '11:00 AM', user: user
+    meal5 = create :meal, meal_time_text: '3:00 PM',  user: user
 
     expect(Meal.within_time("12:00 PM", "3:00 PM")).to include(meal1, meal2, meal5)
     expect(Meal.within_time("12:00 PM", "3:00 PM")).not_to include(meal3, meal4)
@@ -64,11 +64,11 @@ RSpec.describe Meal, type: :model do
 
   it "finds all the meals within specific time for between specific period" do
     user = create :user
-    meal1 = create :meal, meal_time_text: '12:00 PM', meal_time: nil, meal_date: Date.today, user: user
-    meal2 = create :meal, meal_time_text: '1:30 PM',  meal_time: nil, meal_date: (Date.today + 15.days), user: user
-    meal3 = create :meal, meal_time_text: '11:00 PM', meal_time: nil, meal_date: (Date.today + 32.days), user: user
-    meal4 = create :meal, meal_time_text: '11:00 AM', meal_time: nil, meal_date: (Date.today - 2.days), user: user
-    meal5 = create :meal, meal_time_text: '3:00 PM',  meal_time: nil, meal_date: (Date.today + 31.days), user: user
+    meal1 = create :meal, meal_time_text: '12:00 PM', meal_date: Date.today, user: user
+    meal2 = create :meal, meal_time_text: '1:30 PM',  meal_date: (Date.today + 15.days), user: user
+    meal3 = create :meal, meal_time_text: '11:00 PM', meal_date: (Date.today + 32.days), user: user
+    meal4 = create :meal, meal_time_text: '11:00 AM', meal_date: (Date.today - 2.days), user: user
+    meal5 = create :meal, meal_time_text: '3:00 PM',  meal_date: (Date.today + 31.days), user: user
 
     expect(Meal.within_time("12:00 PM", "3:00 PM").within_date(Date.today, (Date.today + 30.days))).to include(meal1, meal2)
     expect(Meal.within_time("12:00 PM", "3:00 PM").within_date(Date.today, (Date.today + 30.days))).not_to include(meal3, meal4, meal5)
