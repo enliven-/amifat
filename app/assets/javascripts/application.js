@@ -34,7 +34,6 @@ $(document).ready(function() {
 });
 
 $(document).ready(function() {
-	console.log('Loading...')
 	$('.date-picker').datetimepicker({
 		pickTime: false
 	});
