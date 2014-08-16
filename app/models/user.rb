@@ -1,9 +1,9 @@
 class User < ActiveRecord::Base
   attr_accessor :password
 
-  validate :username, presence: true, uniqueness: true
-  validate :password, presence: true, on: :create
-  validate :calorie_cuttoff, presence: true,
+  validates :username, presence: true, uniqueness: true
+  validates :password, presence: true, on: :create
+  validates :calorie_cuttoff, presence: true,
   numericality: { greater_than_or_equal_to: 0 }
 
   has_many :meals
