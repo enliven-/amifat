@@ -37,6 +37,7 @@ class MealsController < ApplicationController
   def update
     respond_to do |format|
       if @meal.update(meal_params)
+        @meals = current_user.meals
         format.js
       else
         format.js { render(partial: "application/failure") }

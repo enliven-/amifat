@@ -1,2 +1,2 @@
 $('#meal-modal').modal('hide')
-$('#<%= "meal_#{@meal.id}" %>').replaceWith('<%= j render(@meal) %>')
+$('.meals-body').html('<%= j render(@meals) %>')
