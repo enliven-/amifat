@@ -6,7 +6,8 @@ class Meal < ActiveRecord::Base
   alias_attribute :cal, :calories
   
   validates :name, presence: true
-  validates :calories, presence: true, numericality: true
+  validates :calories, presence: true,
+  numericality: { greater_than_or_equal_to: 0 }
 
   belongs_to :user
 
