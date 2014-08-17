@@ -42,8 +42,8 @@ $(document).ready(function() {
 		pickDate: false,
 		useSeconds: false
 	});
-
-	$(".time-picker").on("dp.change",function (e) {
-       	$('.time-picker').data("DateTimePicker").setMinTime(e.date);
+	
+	$("#filter-date-from").on("dp.change",function (e) {
+       	$('#filter-date-to').data("DateTimePicker").setMinDate(e.date);
     });
 });
