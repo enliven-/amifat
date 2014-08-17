@@ -7,7 +7,7 @@ class Meal < ActiveRecord::Base
   
   validates :name, presence: true
   validates :calories, presence: true,
-  numericality: { greater_than_or_equal_to: 0 }
+            numericality: { greater_than_or_equal_to: 0 }
   
   belongs_to :user
 
@@ -30,11 +30,11 @@ class Meal < ActiveRecord::Base
   end
  
   def meal_time_to_s
-    meal_time.present? ? Time.zone.at(meal_time).utc.strftime("%I:%M %p") : nil
+    meal_time.present? ? Time.zone.at(meal_time).utc.strftime("%I:%M %p") : ''
   end
 
   def meal_date_to_s
-    meal_date.present? ? meal_date.strftime("%d/%m/%Y") : nil
+    meal_date.present? ? meal_date.strftime("%d/%m/%Y") : ''
   end
   
   private
