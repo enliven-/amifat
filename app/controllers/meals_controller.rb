@@ -12,12 +12,9 @@ class MealsController < ApplicationController
     @meal = Meal.new
   end
 
-  # GET /meals/1/edit
   def edit
   end
 
-  # POST /meals
-  # POST /meals.json  
   def create
     @meal = Meal.new(meal_params)
     @meal.user = current_user
@@ -32,8 +29,6 @@ class MealsController < ApplicationController
     end
   end
 
-  # PATCH/PUT /meals/1
-  # PATCH/PUT /meals/1.json
   def update
     respond_to do |format|
       if @meal.update(meal_params)
@@ -45,8 +40,6 @@ class MealsController < ApplicationController
     end
   end
 
-  # DELETE /meals/1
-  # DELETE /meals/1.json
   def destroy
     @meal.destroy
     @meals = current_user.meals
