@@ -8,9 +8,7 @@ class Meal < ActiveRecord::Base
   validates :name, presence: true
   validates :calories, presence: true,
   numericality: { greater_than_or_equal_to: 0 }
-  validates :meal_time, presence: true
-  validates :meal_date, presence: true
-
+  
   belongs_to :user
 
   def self.within_time(from, to)
