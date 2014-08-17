@@ -39,6 +39,6 @@ class User < ActiveRecord::Base
   end
   
   def undereaten?(date)
-    day_calorie_difference(date) <= 0
+    day_calorie_difference(date) < 0
   end
 end
