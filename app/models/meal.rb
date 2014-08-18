@@ -39,14 +39,14 @@ class Meal < ActiveRecord::Base
   
   private
 
-  before_save :save_meal_time_in_seconds
-  def save_meal_time_in_seconds
+  before_save :meal_time_in_seconds
+  def meal_time_in_seconds
     self.meal_time = Time.zone.parse(meal_time_text)
                      .seconds_since_midnight.to_i if meal_time_text.present?
   end
 
-  before_save :save_meal_date_as_date_object
-  def save_meal_date_as_date_object
+  before_save :meal_date_as_date_object
+  def meal_date_as_date_object
     self.meal_date = meal_date_text.to_date if meal_date_text.present?
   end
 end
