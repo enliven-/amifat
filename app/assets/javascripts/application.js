@@ -32,18 +32,3 @@ $(document).ready(function() {
   openModalOnLink('.edit-meal', '#meal-modal');
 
 });
-
-$(document).ready(function() {
-	$('.date-picker').datetimepicker({
-		pickTime: false
-	});
-	
-	$('.time-picker').datetimepicker({
-		pickDate: false,
-		useSeconds: false
-	});
-	
-	$("#filter-date-from").on("dp.change",function (e) {
-       	$('#filter-date-to').data("DateTimePicker").setMinDate(e.date);
-    });
-});

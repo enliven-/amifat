@@ -3,3 +3,14 @@ $('#user-session-links').remove();
 $('#user-links').html('<%= j render("layouts/user_session_links") %>');
 $('.content').html('<%= j render("meals/meals") %>');
 $('.content').append('<%= j render("meals/filters") %>');
+
+$('.date-picker').datetimepicker({
+	pickTime: false
+});
+$('.time-picker').datetimepicker({
+	pickDate: false,
+	useSeconds: false
+});
+$("#filter-date-from").on("dp.change",function (e) {
+   	$('#filter-date-to').data("DateTimePicker").setMinDate(e.date);
+});
