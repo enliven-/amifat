@@ -5,7 +5,14 @@ class MealsController < ApplicationController
   before_filter :authenticate_user
     
   def index
-    @meals = current_user.meals
+    @meals = current_user
+             .meals
+             .within_date(params[:date_from], params[:date_to])
+             .within_time(params[:time_from], params[:time_to])
+    respond_to do |format|
+      format.html
+      format.js
+    end
   end
 
   def new
@@ -47,14 +54,6 @@ class MealsController < ApplicationController
       format.js
     end
   end
-  
-  def filters
-    @meals = current_user.meals
-             .within_date(params[:filter][:date][:from], params[:filter][:date][:to])
-             .within_time(params[:filter][:time][:from], params[:filter][:time][:to])
-    render json: { meals_table: render_to_string(partial: 'meals_table',
-      locals: { meals: @meals }) }
-  end
 
   private
   # Use callbacks to share common setup or constraints between actions.
@@ -65,6 +64,6 @@ class MealsController < ApplicationController
   # Never trust parameters from the scary internet, only allow the white list through.
   def meal_params
     params.require(:meal).permit(:name, :calories, :meal_time_text,
-                                 :meal_date_text, :meal_time, :meal_date)
+    :meal_date_text, :meal_time, :meal_date)
   end
 end

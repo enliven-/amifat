@@ -2,23 +2,25 @@
   <div class="well sidebar-nav">
     <h3>Filters</h3>
     <ul class="nav nav-list">
+		<%= form_tag meals_path, remote: true, method: :get do %>
 		<h4>Time</h4>
 		<li>
 			<h5>From</h5>
-		    <%= text_field_tag :time_from, nil, class: 'form-control time-picker filters', id: 'filter-time-from' %>
+		    <%= text_field_tag :time_from, nil, class: 'form-control time-picker filters' %>
 		    <h5>To</h5>
-		    <%= text_field_tag :time_to, nil, class: 'form-control time-picker filters', id: 'filter-time-to' %>
+		    <%= text_field_tag :time_to, nil, class: 'form-control time-picker filters' %>
 		</li>
 		<br>
 		<h4>Date</h4>
 		<li>
 			<h5>From</h5>
-			<%= text_field_tag :date_from, nil, class: 'form-control date-picker filters', id: 'filter-date-from', data: { 'date-format' => 'DD/MM/YYYY'} %>
+			<%= text_field_tag :date_from, nil, class: 'form-control date-picker filters', data: { 'date-format' => 'DD/MM/YYYY'} %>
 			<h5>To</h5>
-			<%= text_field_tag :date_to, nil, class: 'form-control date-picker filters', id: 'filter-date-to', data: { 'date-format' => 'DD/MM/YYYY'} %>
+			<%= text_field_tag :date_to, nil, class: 'form-control date-picker filters', data: { 'date-format' => 'DD/MM/YYYY'} %>
 		</li>
 	</ul>
 		<%= button_tag 'Filter', class: 'btn btn-primary filter-button' %>
 		<%= button_tag 'Clear Filters', class: 'btn btn-default clear-filters' %>
+		<% end %>
 	</div>
 </div>

@@ -1,10 +1,6 @@
 Rails.application.routes.draw do
 
-  resources :meals, except: [:show] do
-    collection do
-      get :filters
-    end
-  end
+  resources :meals, except: [:show]
   resources :users, only: [:new, :create]
   resources :sessions, only: [:new, :create, :destroy]
 
